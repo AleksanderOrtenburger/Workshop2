@@ -1,34 +1,48 @@
 document.addEventListener("DOMContentLoaded", function(){
-
-    var li = document.querySelector('#gallery').children;
-    var RealLi = [...li];
-    console.log(RealLi);
-    RealLi.forEach(function (a) {
-        console.log(a.dataTag);
-
-    })
-
+    var img = document.querySelectorAll('img');
+    var realImg = [...img];
     var show = document.querySelector('#showButton');
     var hide = document.querySelector('#hideButton');
-    var tagIn = document.querySelector('#tagInput');
+    var tagIn = document.querySelector('input');
     var showIn= tagIn.value;
 
-    show.addEventListener('click',function (event) {
 
 
-        console.log(showIn);
 
+    show.addEventListener('click', function (event) {
+        var inVal = tagIn.value;
+        tagIn.value = "";
 
-        });
-
-
-        
-
-    hide.addEventListener('click',function (event) {
-        showIn='';
-
-
+        if(inVal.length > 0){
+            realImg.forEach(function (el) {
+                var dataset = el.dataset.tag;
+                var Src = dataset.indexOf(inVal);
+                if(Src !== -1){
+                    el.removeAttribute("class", "invisible");
+                };
+            });
+        }
     });
+
+    hide.addEventListener('click', function (event) {
+
+
+        var inVal = tagIn.value;
+        tagIn.value = "";
+
+        if(inVal.length > 0){
+
+            realImg.forEach(function (el) {
+                var dataset = el.dataset.tag;
+                var Src = dataset.indexOf(inVal);
+                if(Src !== -1){
+                    el.setAttribute("class", "invisible");
+                };
+            });
+        };
+    });
+
+
 
 })
 
